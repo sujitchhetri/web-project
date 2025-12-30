@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>HTML5 APIs</title>
+</head>
+<body>
+<h2>Local Storage</h2>
+<h1>User Information</h1>
+
+    <label>Enter Name:</label>
+    <input type="text" id="username">
+    <br><br>
+
+    <button onclick="saveData()">Save Data</button>
+    <button onclick="loadData()">Load Data</button>
+
+    <p id="output"></p>
+
+
+<h2>Geolocation</h2>
+<button onclick="getLocation()">Get Location</button>
+<p id="location"></p>
+
+<h2>Canvas</h2>
+<canvas id="myCanvas" width="200" height="100" style="border:1px solid black;"></canvas>
+<script>
+ function saveData() {
+            let name = document.getElementById("username").value;
+            localStorage.setItem("userName", name);
+            alert("Data Saved Successfully");
+        }
+
+        function loadData() {
+            let storedName = localStorage.getItem("userName");
+            document.getElementById("output").innerHTML =
+                "Stored Name: " + storedName;
+        }
+function getLocation() {
+    navigator.geolocation.getCurrentPosition(function(pos) {
+        document.getElementById("location").innerHTML =
+        "Latitude: " + pos.coords.latitude + "<br>Longitude: " + pos.coords.longitude;
+    });
+}
+let c = document.getElementById("myCanvas");
+let ctx = c.getContext("2d");
+ctx.fillRect(20, 20, 150, 50);
+</script>
+</body>
+</html>
