@@ -1,115 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>Style Images with CSS</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text, Font & Alignment</title>
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-        padding: 20px;
-      }
-
-      .container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 30px;
-        margin-top: 20px;
-      }
-
-      .image-box {
-        width: 300px;
-        border: 1px solid #ddd;
-        padding: 15px;
-        border-radius: 10px;
-        background: #f9f9f9;
-      }
-
-      .styled-image {
-        width: 250px;
-        height: 150px;
-        object-fit: cover;
-        border: 4px solid #3498db;
-        border-radius: 10px;
-        margin: 10px 0;
-      }
-
-      .float-image {
-        width: 120px;
-        height: 120px;
-        border: 3px solid #e74c3c;
-        float: left;
-        margin: 0 15px 10px 0;
-        border-radius: 5px;
-      }
-
-      .background-box {
-        width: 250px;
-        height: 150px;
-        background-image: url("image4.png");
-        background-size: cover;
-        border: 2px solid #2c3e50;
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: black;
-        font-weight: bold;
-        font-size: 18px;
-      }
-
-      .circle-image {
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
-        border: 4px solid #2ecc71;
-        object-fit: cover;
-        margin: 10px 0;
-      }
-
-      .text-content {
-        text-align: left;
-        background: white;
-        padding: 10px;
-        border-radius: 5px;
-        border: 1px solid #eee;
-      }
+        body {
+            font-family: Arial;
+            padding: 15px;
+        }
+        
+        .demo-area {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .text-box {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .font-family {
+            font-family: "Georgia", serif;
+        }
+        
+        .font-size {
+            font-size: 24px;
+        }
+        
+        .font-weight {
+            font-weight: bold;
+        }
+        
+        .text-align-left {
+            text-align: left;
+            background: #e8f4fc;
+        }
+        
+        .text-align-center {
+            text-align: center;
+            background: #e8f8f4;
+        }
+        
+        .text-align-right {
+            text-align: right;
+            background: #fce8e8;
+        }
+        
+        .line-height {
+            line-height: 2;
+            background: #f4e8fc;
+        }
+        
+        .text-decoration-underline {
+            text-decoration: underline;
+        }
+        
+        .text-decoration-line-through {
+            text-decoration: line-through;
+        }
+        
+        h3 {
+            color: #2c3e50;
+            margin: 20px 0 10px 0;
+        }
     </style>
-  </head>
-  <body>
-    <h2>Style Images Using CSS</h2>
-
-    <div class="container">
-      <div class="image-box">
-        <h3>1. Basic Styling</h3>
-        <img src="image1.png" alt="Styled Image" class="styled-image" />
-        <p>Fixed size, blue border, rounded corners</p>
-      </div>
-
-      <div class="image-box">
-        <h3>2. Float & Text Wrap</h3>
-        <div class="text-content">
-          <img src="image2.png" alt="Float Image" class="float-image" />
-          <p style="text-align: right">
-            This image floats left with text wrapping around it. The red border
-            and margin create visual separation from the text content.
-          </p>
+</head>
+<body>
+    <h2 style="text-align: center;">Text, Font & Alignment</h2>
+    
+    <div class="demo-area">
+        <h3>Font Properties</h3>
+        <div class="text-box font-family">
+            font-family: Georgia, serif
         </div>
-      </div>
-      <div class="image-box">
-        <h3>3. Background Image</h3>
-        <div class="background-box">CSS Background Image</div>
-        <p>Background image with centered text</p>
-      </div>
-
-      <div class="image-box">
-        <h3>4. Circular Image</h3>
-        <img src="image3.png" alt="Circular Image" class="circle-image" />
-        <p>Circular crop with green border</p>
-      </div>
+        <div class="text-box font-size">
+            font-size: 24px
+        </div>
+        <div class="text-box font-weight">
+            font-weight: bold
+        </div>
+        
+        <h3>Text Alignment</h3>
+        <div class="text-box text-align-left">
+            text-align: left
+        </div>
+        <div class="text-box text-align-center">
+            text-align: center
+        </div>
+        <div class="text-box text-align-right">
+            text-align: right
+        </div>
+        
+        <h3>Line Height & Decoration</h3>
+        <div class="text-box line-height">
+            line-height: 2<br>
+            This provides more spacing between lines for better readability.
+        </div>
+        <div class="text-box">
+            <span class="text-decoration-underline">text-decoration: underline</span> | 
+            <span class="text-decoration-line-through">text-decoration: line-through</span>
+        </div>
     </div>
-  </body>
+</body>
 </html>
