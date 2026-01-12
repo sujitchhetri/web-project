@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FlexBox Lab | Modern Web Layouts</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        background: #f5f7fa;
+        color: #2c3e50;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+      h1 {
+        text-align: center;
+        color: #2c3e50;
+        margin: 2rem 0;
+        font-size: 2.5rem;
+      }
+      h1::after {
+        content: "";
+        display: block;
+        width: 100px;
+        height: 4px;
+        background: linear-gradient(to right, #667eea, #764ba2);
+        margin: 1rem auto;
+      }
+      h2 {
+        color: #3498db;
+        margin: 2rem 0 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #f0f0f0;
+      }
+
+      /* Navigation */
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: linear-gradient(135deg, #2c3e50, #4a6491);
+        padding: 1rem 2rem;
+        border-radius: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 3rem;
+      }
+      .logo {
+        color: white;
+        font-size: 1.8rem;
+        font-weight: bold;
+        text-decoration: none;
+      }
+      .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 1.5rem;
+      }
+      .nav-links a {
+        color: white;
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        transition: 0.3s;
+      }
+      .nav-links a:hover {
+        background: rgba(255, 255, 255, 0.15);
+      }
+      .nav-cta {
+        background: #e74c3c;
+        padding: 0.8rem 1.5rem;
+        border-radius: 50px;
+      }
+
+      /* Cards */
+      .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        justify-content: center;
+        margin-top: 1.5rem;
+      }
+      .card {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        flex: 1 1 300px;
+        max-width: 350px;
+        display: flex;
+        flex-direction: column;
+        transition: 0.3s;
+      }
+      .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+      }
+      .card-img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-bottom: 3px solid #3498db;
+      }
+      .card-content {
+        padding: 1.5rem;
+        flex-grow: 1;
+      }
+      .card-title {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+      .card-desc {
+        color: #7f8c8d;
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+      }
+      .card-button {
+        background: #3498db;
+        color: white;
+        border: none;
+        padding: 0.8rem 1.5rem;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      .card-button:hover {
+        background: #2980b9;
+      }
+
+      /* Pricing */
+      .pricing-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        justify-content: center;
+        margin-top: 2rem;
+      }
+      .pricing-plan {
+        background: white;
+        border-radius: 15px;
+        padding: 2rem;
+        flex: 1 1 280px;
+        max-width: 320px;
+        text-align: center;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        transition: 0.3s;
+        display: flex;
+        flex-direction: column;
+      }
+      .pricing-plan:hover {
+        transform: translateY(-10px);
+      }
+      .plan-title {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+      .plan-price {
+        font-size: 2.5rem;
+        color: #9b59b6;
+        margin: 1rem 0;
+        font-weight: bold;
+      }
+      .plan-features {
+        list-style: none;
+        margin: 1.5rem 0;
+        flex-grow: 1;
+      }
+      .plan-features li {
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #eee;
+      }
+      .plan-button {
+        background: #9b59b6;
+        color: white;
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 50px;
+        cursor: pointer;
+        margin-top: auto;
+        transition: 0.3s;
+      }
+      .plan-button:hover {
+        background: #8e44ad;
+      }
+      .popular {
+        border: 2px solid #9b59b6;
+        position: relative;
+      }
+      .popular-tag {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #e74c3c;
+        color: white;
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+      }
+
+      /* Footer */
+      footer {
+        text-align: center;
+        margin: 4rem 0 2rem;
+        color: #7f8c8d;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .navbar {
+          flex-direction: column;
+          gap: 1rem;
+          padding: 1rem;
+        }
+        .nav-links {
+          flex-direction: column;
+          align-items: center;
+          gap: 0.5rem;
+        }
+        .card,
+        .pricing-plan {
+          flex: 1 1 100%;
+          max-width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Modern Web Layouts with FlexBox</h1>
+      </header>
+
+      <!-- Navigation Bar -->
+      <nav class="navbar">
+        <a href="#" class="logo">FlexBoxLab</a>
+        <ul class="nav-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">Portfolio</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#" class="nav-cta">Get Started</a></li>
+        </ul>
+      </nav>
+
+      <!-- Card Layout -->
+      <section id="cards">
+        <h2>Explore Our Services</h2>
+        <div class="card-container">
+          <div class="card">
+            <img
+              src="image1.png"
+              alt="Mountain"
+              class="card-img"
+            />
+            <div class="card-content">
+              <h3 class="card-title">Web Development</h3>
+              <p class="card-desc">
+                Custom websites built with modern technologies and responsive
+                design principles.
+              </p>
+              <button class="card-button">Learn More</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <img
+              src="image2.png"
+              alt="Beach"
+              class="card-img"
+            />
+            <div class="card-content">
+              <h3 class="card-title">UI/UX Design</h3>
+              <p class="card-desc">
+                Beautiful user interfaces designed for optimal user experience
+                across all devices.
+              </p>
+              <button class="card-button">View Projects</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <img
+              src="image3.png"
+              alt="Forest"
+              class="card-img"
+            />
+            <div class="card-content">
+              <h3 class="card-title">Consulting</h3>
+              <p class="card-desc">
+                Expert guidance on modern web technologies and best practices
+                for your business.
+              </p>
+              <button class="card-button">Get Quote</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Pricing Section -->
+      <section id="pricing">
+        <h2>Choose Your Plan</h2>
+        <div class="pricing-container">
+          <div class="pricing-plan">
+            <h3 class="plan-title">Basic</h3>
+            <div class="plan-price">
+              $29<span style="font-size: 1rem">/month</span>
+            </div>
+            <ul class="plan-features">
+              <li>Responsive Website</li>
+              <li>Basic SEO</li>
+              <li>Email Support</li>
+              <li>5 Pages</li>
+            </ul>
+            <button class="plan-button">Get Started</button>
+          </div>
+
+          <div class="pricing-plan popular">
+            <div class="popular-tag">Popular</div>
+            <h3 class="plan-title">Professional</h3>
+            <div class="plan-price">
+              $79<span style="font-size: 1rem">/month</span>
+            </div>
+            <ul class="plan-features">
+              <li>Everything in Basic</li>
+              <li>Advanced SEO</li>
+              <li>Priority Support</li>
+              <li>Unlimited Pages</li>
+            </ul>
+            <button class="plan-button">Most Popular</button>
+          </div>
+
+          <div class="pricing-plan">
+            <h3 class="plan-title">Enterprise</h3>
+            <div class="plan-price">
+              $199<span style="font-size: 1rem">/month</span>
+            </div>
+            <ul class="plan-features">
+              <li>Everything in Pro</li>
+              <li>Custom Development</li>
+              <li>24/7 Support</li>
+              <li>Dedicated Manager</li>
+            </ul>
+            <button class="plan-button">Contact Us</button>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <p>&copy; FlexBox Lab 2026 | Modern Web Design</p>
+      </footer>
+    </div>
+  </body>
+</html>
