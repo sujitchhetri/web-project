@@ -1,0 +1,21 @@
+// Button mixin
+@mixin button($bg-color) {
+    background: $bg-color;
+    color: white;
+    border: none;
+    padding: $spacing-sm $spacing-md;
+    border-radius: $border-radius;
+    cursor: pointer;
+    
+    &:hover {
+        opacity: 0.9;
+    }
+}
+
+// Card mixin
+@mixin card {
+    background: white;
+    padding: $spacing-md;
+    border-radius: $border-radius;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Specificity & Inheritance</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5; }
+        
+        /* PROBLEM 1: Specificity Issues */
+        p { color: blue; } 
+        .text { color: green; } 
+        #special { color: red; } 
+        
+        /* FIX: Use consistent specificity */
+        .fixed-text { color: #2c3e50; }
+        
+        /* PROBLEM 2: !important abuse */
+        .important-bad { color: orange !important; }
+        
+        /* FIX: Better specificity */
+        .important-fix { color: #e74c3c; font-weight: bold; }
+        
+        /* INHERITANCE DEMO */
+        .parent {
+            color: #27ae60;
+            font-family: 'Arial', sans-serif;
+            font-size: 18px;
+            padding: 20px;
+            background: #ecf0f1;
+            margin: 10px;
+        }
+        
+        .child {
+            color: #e67e22; /* Overrides inherited color */
+            margin-top: 10px;
+        }
+        
+        .inherit-child {
+            color: inherit; /* Forces inheritance */
+            font-size: inherit;
+        }
+        
+        /* DEBUG EXAMPLE */
+        .debug {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        
+        .debug p { color: #666; }
+        p.highlight { color: #3498db; }
+        #debug-id { color: #9b59b6; }
+    </style>
+</head>
+<body>
+    <h1>CSS Specificity & Inheritance</h1>
+    
+    <!-- 1. SPECIFICITY PROBLEM -->
+    <div class="debug">
+        <h2>1. Specificity Problem</h2>
+        <p class="text" id="special" style="color: purple;">
+            What color am I? (Inline style wins: 1000 points)
+        </p>
+        <p><strong>Specificity order:</strong> Inline > ID > Class > Element</p>
+    </div>
+    
+    <!-- 2. SPECIFICITY FIX -->
+    <div class="debug">
+        <h2>2. Specificity Fix</h2>
+        <p class="fixed-text">Use consistent class-based styling</p>
+        <p class="important-bad">Bad: Using !important</p>
+        <p class="important-fix">Good: Proper specificity</p>
+    </div>
+    
+    <!-- 3. INHERITANCE -->
+    <div class="parent">
+        <h2>3. Inheritance Demo</h2>
+        <p>Parent element properties:</p>
+        <ul>
+            <li>✅ Inherited: color, font-family, font-size</li>
+            <li>❌ Not inherited: padding, margin, background</li>
+        </ul>
+        
+        <div class="child">
+            <p>Child overriding color</p>
+        </div>
+        
+        <div class="inherit-child">
+            <p>Child forcing inheritance</p>
+        </div>
+    </div>
+    
+    <!-- 4. DEBUG PRACTICE -->
+    <div class="debug">
+        <h2>4. Debug This:</h2>
+        <p class="highlight" id="debug-id">
+            Which color rule wins?
+        </p>
+        <p><strong>Rules:</strong></p>
+        <ul>
+            <li><code>.debug p</code> - Specificity: 11 (loses)</li>
+            <li><code>p.highlight</code> - Specificity: 11 (loses)</li>
+            <li><code>#debug-id</code> - Specificity: 100 (wins!)</li>
+        </ul>
+    </div>
+</body>
+</html>

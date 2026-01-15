@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Units Lab</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; }
+        
+        /* Base for rem */
+        html { font-size: 16px; }
+        
+        /* 1. Layout with relative units */
+        .container {
+            width: 90vw;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            background: #f5f5f5;
+        }
+        
+        .box {
+            width: 80%;
+            height: 10rem;
+            margin: 1rem auto;
+            background: #3498db;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .inner-box {
+            width: 50%;
+            height: 5rem;
+            background: #2ecc71;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .item {
+            background: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+        
+        /* 2. Hero with vh/vw */
+        .hero {
+            height: 70vh;
+            width: 100vw;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 80vw;
+            padding: 5vh 5vw;
+        }
+        
+        .hero-title {
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            margin-bottom: 2vh;
+        }
+        
+        .hero-btn {
+            background: white;
+            color: #667eea;
+            border: none;
+            padding: 1vh 3vw;
+            border-radius: 50px;
+            margin-top: 3vh;
+            font-size: 1rem;
+        }
+        
+        /* Demo */
+        .demo {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .demo-box {
+            padding: 1rem;
+            background: white;
+            border-radius: 0.5rem;
+            text-align: center;
+        }
+        
+        .rem-box { width: 15rem; }
+        .percent-box { width: 50%; }
+        .vw-box { width: 20vw; }
+        
+        @media (max-width: 768px) {
+            .hero { height: 60vh; }
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Responsive page</h1>
+            <p>Using vh and vw units</p>
+            <button class="hero-btn">Click Me</button>
+        </div>
+    </section>
+    
+    <!-- Layout Section -->
+    <main class="container">
+        <h2>Relative Units Layout</h2>
+        
+        <div class="box">
+            <div class="inner-box">50% width box</div>
+        </div>
+        
+        <div class="grid">
+            <div class="item">
+                <h3>rem</h3>
+                <p>Root relative</p>
+            </div>
+            <div class="item">
+                <h3>%</h3>
+                <p>Parent relative</p>
+            </div>
+            <div class="item">
+                <h3>vh/vw</h3>
+                <p>Viewport relative</p>
+            </div>
+        </div>
+        
+        <div class="demo">
+            <div class="demo-box rem-box">15rem</div>
+            <div class="demo-box percent-box">50%</div>
+            <div class="demo-box vw-box">20vw</div>
+        </div>
+    </main>
+</body>
+</html>
