@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scope Demo</title>
+</head>
+<body>
+    <h2>Local vs Global Scope</h2>
+    <p id="output"></p>
+
+    <script>
+        let globalVar = "I am global";
+
+        function scopeDemo() {
+            let localVar = "I am local";
+            console.log("Inside function:", localVar);
+            console.log("Global inside function:", globalVar);
+
+        }
+
+        scopeDemo();
+        console.log("Outside function:", globalVar);
+        
+
+        document.getElementById("output").innerHTML = 
+            `Global: ${globalVar} <br> Check console for scope details.`;
+    </script>
+</body>
+</html>

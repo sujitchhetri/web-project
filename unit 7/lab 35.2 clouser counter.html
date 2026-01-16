@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Closure Counter</title>
+</head>
+<body>
+    <h2>Private Counter using Closure</h2>
+    <button onclick="incrementCounter()">Increment Counter</button>
+    <button onclick="getCounter()">Get Counter Value</button>
+    <p id="result"></p>
+
+    <script>
+        function createCounter() {
+            let privateCounter = 0; 
+
+            function changeBy(val) {
+                privateCounter += val;
+            }
+
+            return {
+                increment: function() {
+                    changeBy(1);
+                },
+                getValue: function() {
+                    return privateCounter;
+                }
+            };
+        }
+
+        const counter = createCounter();
+
+        function incrementCounter() {
+            counter.increment();
+            document.getElementById("result").innerHTML = 
+                "Counter incremented. Click 'Get Counter Value' to see.";
+        }
+
+        function getCounter() {
+            document.getElementById("result").innerHTML = 
+                `Current Counter Value: ${counter.getValue()}`;
+        }
+    </script>
+</body>
+</html>
