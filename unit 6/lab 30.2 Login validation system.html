@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Validation System</title>
+</head>
+<body>
+    <h2>Login Validation System</h2>
+    <input type="text" id="usernameInput" placeholder="Enter username">
+    <input type="password" id="passwordInput" placeholder="Enter password">
+    <button onclick="validateLogin()">Login</button>
+    <p id="loginMessage"></p>
+
+    <script>
+        function validateLogin() {
+            const username = document.getElementById('usernameInput').value;
+            const password = document.getElementById('passwordInput').value;
+            const messageElement = document.getElementById('loginMessage');
+            
+            // Using if-else statements
+            if (username === "" || password === "") {
+                messageElement.textContent = "Both fields are required!";
+                messageElement.style.color = "red";
+            } else if (username === "sujit" && password === "sujit123") {
+                messageElement.textContent = "Login successful! Welcome Sujit.";
+                messageElement.style.color = "green";
+            } else if (username === "pcm" && password === "pcm123") {
+                messageElement.textContent = "Login successful! Welcome PCM.";
+                messageElement.style.color = "green";
+            } else {
+                messageElement.textContent = "Invalid username or password!";
+                messageElement.style.color = "red";
+            }
+        
+        }
+    </script>
+</body>
+</html>

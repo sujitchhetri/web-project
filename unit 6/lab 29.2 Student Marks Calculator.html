@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Grade Calculator</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .grade-calculator { max-width: 400px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px; }
+        input, button { margin: 5px 0; padding: 8px; width: 100%; }
+        .result { margin-top: 15px; padding: 15px; background: #f4f4f4; border-radius: 5px; }
+        .grade { font-weight: bold; font-size: 1.2em; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="grade-calculator">
+        <h2>Student Marks & Grade Calculator</h2>
+        <input type="number" id="math" placeholder="Math marks (0-100)" min="0" max="100">
+        <input type="number" id="web" placeholder="Web marks (0-100)" min="0" max="100">
+        <input type="number" id="english" placeholder="English marks (0-100)" min="0" max="100">
+        <input type="number" id="fundamental" placeholder="fundamental marks (0-100)" min="0" max="100">
+        <input type="number" id="programming" placeholder="programming marks (0-100)" min="0" max="100">
+        <button onclick="calculateGrade()">Calculate Grade</button>
+        <div class="result" id="gradeResult"></div>
+    </div>
+
+    <script>
+        function calculateGrade() {
+            const math = parseFloat(document.getElementById('math').value);
+            const web = parseFloat(document.getElementById('web').value);
+            const english = parseFloat(document.getElementById('english').value);
+            const fundamental = parseFloat(document.getElementById('fundamental').value);
+            const programming = parseFloat(document.getElementById('programming').value);
+
+
+            if (math < 0 || math > 100 || web < 0 || web > 100 || english < 0 || english > 100 || fundamental < 0 || fundamental > 100 || programming < 0 || programming > 100) {
+                document.getElementById('gradeResult').innerHTML = "Marks must be between 0 and 100.";
+                return;
+            }
+
+            const total = math + web + english + fundamental + programming;
+            const average = total / 5;
+            let grade;
+
+            if (average >= 90) grade = "A+";
+            else if (average >= 80) grade = "A";
+            else if (average >= 70) grade = "B";
+            else if (average >= 60) grade = "C";
+            else if (average >= 50) grade = "D";
+            else grade = "F";
+
+            document.getElementById('gradeResult').innerHTML = `
+                <p><strong>Math:</strong> ${math}</p>
+                <p><strong>Web:</strong> ${web}</p>
+                <p><strong>English:</strong> ${english}</p>
+                <p><strong>Fundamental:</strong> ${fundamental}</p>
+                <p><strong>Programming:</strong> ${programming}</p>
+                <p><strong>Total:</strong> ${total}/500</p>
+                <p><strong>Average:</strong> ${average.toFixed(2)}%</p>
+                <div class="grade"><strong>Grade:</strong> ${grade}</div>
+            `;
+        }
+    </script>
+</body>
+</html>

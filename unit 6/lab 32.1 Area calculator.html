@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Area Calculator</title>
+</head>
+<body>
+    <h2>Area Calculator</h2>
+    
+    <div>
+        <h3>Rectangle</h3>
+        <label for="rectangleLength">Length:</label>
+        <input type="number" id="rectangleLength" placeholder="Enter length" min="0" step="any">
+        <br><br>
+        <label for="rectangleWidth">Width:</label>
+        <input type="number" id="rectangleWidth" placeholder="Enter width" min="0" step="any">
+        <br><br>
+        <button onclick="calculateRectangleArea()">Calculate Rectangle Area</button>
+        <p id="rectangleResult" style="margin-top: 10px; font-weight: bold;"></p>
+    </div>
+    
+    <div style="margin-top: 30px;">
+        <h3>Circle</h3>
+        <label for="circleRadius">Radius:</label>
+        <input type="number" id="circleRadius" placeholder="Enter radius" min="0" step="any">
+        <br><br>
+        <button onclick="calculateCircleArea()">Calculate Circle Area</button>
+        <p id="circleResult" style="margin-top: 10px; font-weight: bold;"></p>
+    </div>
+
+    <script>
+        function calculateRectangleArea() {
+            const lengthInput = document.getElementById('rectangleLength');
+            const widthInput = document.getElementById('rectangleWidth');
+            
+            const length = parseFloat(lengthInput.value);
+            const width = parseFloat(widthInput.value);
+            
+            if (isNaN(length) || isNaN(width) || length <= 0 || width <= 0) {
+                document.getElementById('rectangleResult').textContent = 
+                    "Please enter valid positive numbers for length and width.";
+                return;
+            }
+            
+            const area = length * width;
+            document.getElementById('rectangleResult').textContent = 
+                `Rectangle Area: ${length} × ${width} = ${area.toFixed(2)}`;
+        }
+
+        function calculateCircleArea() {
+            const radiusInput = document.getElementById('circleRadius');
+            const radius = parseFloat(radiusInput.value);
+            
+            if (isNaN(radius) || radius <= 0) {
+                document.getElementById('circleResult').textContent = 
+                    "Please enter a valid positive number for radius.";
+                return;
+            }
+            
+            const area = Math.PI * radius * radius;
+            document.getElementById('circleResult').textContent = 
+                `Circle Area: π × ${radius}² = ${area.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>

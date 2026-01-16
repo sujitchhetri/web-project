@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Even Numbers</title></head>
+<body>
+    <h2>Even Numbers 1-50</h2>
+    <button onclick="showEvens()">Show Even Numbers</button>
+    <div id="result"></div>
+
+    <script>
+        function showEvens() {
+            let numbers = "";
+            
+            for (let i = 1; i <= 50; i++) {
+                if (i % 2 === 0) {
+                    numbers += i + "<br>";
+                }
+            }
+            
+            document.getElementById('result').innerHTML = numbers;
+        }
+    </script>
+</body>
+</html>

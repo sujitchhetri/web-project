@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head><title>Employees Table</title>
+<style>
+    table { border-collapse: collapse; margin-top: 10px; }
+    th, td { border: 1px solid black; padding: 8px; text-align: left; }
+    th { background-color: #f2f2f2; }
+</style>
+</head>
+<body>
+    <h2>Employees Information</h2>
+    <button onclick="displayEmployees()">Show Employees</button>
+    <div id="employeeTable"></div>
+
+    <script>
+        function displayEmployees() {
+            const employees = [
+                { id: 1, name: "Sujit Chhetri", position: "Manager", salary: 80000, department: "IT" },
+                { id: 2, name: "Aayush Karki", position: "Developer", salary: 60000, department: "IT" },
+                { id: 3, name: "Rashik Parajuli", position: "Designer", salary: 55000, department: "Creative" },
+                { id: 4, name: "Darsan Poudel", position: "Analyst", salary: 65000, department: "Finance" },
+                { id: 5, name: "Bikram Poudel", position: "Tester", salary: 50000, department: "QA" }
+            ];
+            
+            let html = "<h3>Employee Details:</h3>";
+            html += "<table>";
+            html += "<tr><th>ID</th><th>Name</th><th>Position</th><th>Department</th><th>Salary</th></tr>";
+            
+            for (let i = 0; i < employees.length; i++) {
+                html += `<tr>
+                    <td>${employees[i].id}</td>
+                    <td>${employees[i].name}</td>
+                    <td>${employees[i].position}</td>
+                    <td>${employees[i].department}</td>
+                    <td>Rs. ${employees[i].salary}</td>
+                </tr>`;
+            }
+            
+            html += "</table>";
+            document.getElementById('employeeTable').innerHTML = html;
+        }
+    </script>
+</body>
+</html>

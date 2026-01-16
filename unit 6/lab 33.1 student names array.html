@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head><title>Student Names</title></head>
+<body>
+    <h2>Student Names Display</h2>
+    <button onclick="displayStudents()">Show Students</button>
+    <div id="studentList"></div>
+
+    <script>
+        function displayStudents() {
+            const students = ["Sujit Chhetri", "Bikram Poudel", "Darsan Poudel", 
+                             "Sahil Subedi", "Amit Kunwar", "RAshik Parajuli"];
+            let html = "<h3>Student List:</h3><ul>";
+            
+            for (let i = 0; i < students.length; i++) {
+                html += `<li>${students[i]}</li>`;
+            }
+            
+            html += "</ul>";
+            document.getElementById('studentList').innerHTML = html;
+        }
+    </script>
+</body>
+</html>

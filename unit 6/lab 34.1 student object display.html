@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head><title>Student Object</title></head>
+<body>
+    <h2>Student Object Display</h2>
+    <button onclick="displayStudent()">Show Student Info</button>
+    <div id="studentInfo"></div>
+
+    <script>
+        function displayStudent() {
+            const student = {
+                name: "Sujit Chhetri",
+                age: 20,
+                grade: "A",
+                rollNo: 33,
+                course: "BCSIT"
+            };
+            
+            let html = "<h3>Student Details:</h3>";
+            html += `<p><strong>Name:</strong> ${student.name}</p>`;
+            html += `<p><strong>Age:</strong> ${student.age}</p>`;
+            html += `<p><strong>Grade:</strong> ${student.grade}</p>`;
+            html += `<p><strong>Roll No:</strong> ${student.rollNo}</p>`;
+            html += `<p><strong>Course:</strong> ${student.course}</p>`;
+            
+            document.getElementById('studentInfo').innerHTML = html;
+        }
+    </script>
+</body>
+</html>
