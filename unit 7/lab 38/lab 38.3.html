@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h2>Async/Await API Example</h2>
+    <button onclick="fetchData()">Fetch Data</button>
+    <div id="output"></div>
+
+    <script>
+        async function fetchData() {
+            try {
+                document.getElementById("output").innerHTML = 
+                    "<div>Loading...</div>";
+                
+                
+                const response = await fetch('data.json');
+                const data = await response.json();
+                
+                let html = "<h3>Latest Posts:</h3>";
+                data.forEach(post => {
+                    html += `<div><strong>${post.title}</strong><br>${post.body}</div><hr>`;
+                });
+                
+               
+                html += `<em>Data fetched and rendered seamlessly with async/await!</em>`;
+                
+                document.getElementById("output").innerHTML = html;
+                
+            } catch (error) {
+                document.getElementById("output").innerHTML = 
+                    `<div>Error: ${error.message}</div>`;
+            }
+        }
+    </script>
+</body>
+</html>
