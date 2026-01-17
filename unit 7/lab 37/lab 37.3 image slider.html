@@ -1,0 +1,183 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Slider</title>
+    <style>
+      .slider-container {
+        max-width: 800px;
+        margin: 40px auto;
+        text-align: center;
+      }
+      #sliderImage {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: opacity 0.5s;
+      }
+      .controls {
+        margin: 20px 0;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        align-items: center;
+      }
+      button {
+        padding: 10px 20px;
+        background: #3498db;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      button:hover {
+        background: #2980b9;
+      }
+      button:disabled {
+        background: #95a5a6;
+        cursor: not-allowed;
+      }
+      .thumbnails {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 20px;
+        flex-wrap: wrap;
+      }
+      .thumbnail {
+        width: 80px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 5px;
+        cursor: pointer;
+        opacity: 0.7;
+        transition: 0.3s;
+      }
+      .thumbnail:hover,
+      .active {
+        opacity: 1;
+        transform: scale(1.1);
+        border: 2px solid #3498db;
+      }
+      .info {
+        margin-top: 10px;
+        font-style: italic;
+        color: #7f8c8d;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slider-container">
+      <h2>Nature Image Slider</h2>
+      <img id="sliderImage" src="" alt="" />
+      <div class="info">
+        <p id="caption">Image 1: Mountain Landscape</p>
+        <p id="counter">1 / 5</p>
+      </div>
+      <div class="controls">
+        <button id="prev" onclick="prev()">Previous</button>
+        <button id="next" onclick="next()">Next</button>
+        <button id="auto" onclick="toggleAuto()">Start Auto</button>
+      </div>
+      <div class="thumbnails" id="thumbs"></div>
+    </div>
+
+    <script>
+      const images = [
+        {
+          url: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800",
+          cap: "Mountain Landscape",
+        },
+        {
+          url: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800",
+          cap: "Forest Path",
+        },
+        {
+          url: "https://images.unsplash.com/photo-1439066615861-d1af74d74000?w-800",
+          cap: "Ocean Waves",
+        },
+        {
+          url: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800",
+          cap: "Sunset Fields",
+        },
+        {
+          url: "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=800",
+          cap: "Desert Dunes",
+        },
+      ];
+
+      let idx = 0,
+        auto = null,
+        isAuto = false;
+
+      function init() {
+        update();
+        images.forEach((img, i) => {
+          const thumb = document.createElement("img");
+          thumb.src = img.url;
+          thumb.className = "thumbnail";
+          thumb.onclick = () => {
+            idx = i;
+            update();
+          };
+          document.getElementById("thumbs").appendChild(thumb);
+        });
+        updateThumbs();
+      }
+
+      function update() {
+        const img = document.getElementById("sliderImage");
+        img.style.opacity = "0";
+        setTimeout(() => {
+          img.src = images[idx].url;
+          img.alt = images[idx].cap;
+          document.getElementById("caption").textContent =
+            `Image ${idx + 1}: ${images[idx].cap}`;
+          document.getElementById("counter").textContent =
+            `${idx + 1} / ${images.length}`;
+          img.style.opacity = "1";
+        }, 200);
+        document.getElementById("prev").disabled = idx === 0;
+        document.getElementById("next").disabled = idx === images.length - 1;
+        updateThumbs();
+      }
+
+      function updateThumbs() {
+        document
+          .querySelectorAll(".thumbnail")
+          .forEach((t, i) =>
+            t.classList[i === idx ? "add" : "remove"]("active")
+          );
+      }
+
+      function next() {
+        if (idx < images.length - 1) update(++idx);
+      }
+      function prev() {
+        if (idx > 0) update(--idx);
+      }
+
+      function toggleAuto() {
+        const btn = document.getElementById("auto");
+        if (isAuto) {
+          clearInterval(auto);
+          btn.textContent = "Start Auto";
+          isAuto = false;
+        } else {
+          auto = setInterval(() => {
+            idx = idx === images.length - 1 ? 0 : idx + 1;
+            update();
+          }, 2000);
+          btn.textContent = "Stop Auto";
+          isAuto = true;
+        }
+      }
+
+      window.onload = init;
+    </script>
+  </body>
+</html>

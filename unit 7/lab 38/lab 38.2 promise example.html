@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Promise Example</title>
+    </head>
+    <h2>Promise Example</h2>
+    <button onclick="startPromise()">Start Promise (2s)</button>
+    <div id="output"></div>
+
+    <script>
+        function startPromise() {
+            document.getElementById("output").innerHTML = 
+                "<div>Promise pending...</div>";
+            
+            new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve("Promise resolved after 2 seconds!");
+                }, 2000);
+            })
+            .then(result => {
+                document.getElementById("output").innerHTML += 
+                    `<div>${result}</div>`;
+            })
+            .catch(error => {
+                document.getElementById("output").innerHTML += 
+                    `<div>Error: ${error}</div>`;
+            });
+        }
+    </script>
+</body>
+</html>

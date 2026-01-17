@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "title": "My Lab Report Title",
+        "body": "This is custom text for my lab report",
+        "userId": 1
+    },
+    {
+        "id": 2,
+        "title": "JavaScript Learning",
+        "body": "I'm learning async/await in JavaScript",
+        "userId": 1
+    }
+]

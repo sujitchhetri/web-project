@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Handling - Division</title>
+</head>
+<body>
+    <h2>Safe Division Calculator</h2>
+    <label>Numerator: <input type="number" id="numerator"></label><br><br>
+    <label>Denominator: <input type="number" id="denominator"></label><br><br>
+    <button onclick="safeDivide()">Divide</button>
+    <p id="result"></p>
+
+    <script>
+        function safeDivide() {
+            const numInput = document.getElementById("numerator").value;
+            const denInput = document.getElementById("denominator").value;
+            const resultElement = document.getElementById("result");
+
+            try {
+                
+                if (numInput === "" || denInput === "") {
+                    throw "Both numerator and denominator are required.";
+                }
+                
+                const num = parseFloat(numInput);
+                const den = parseFloat(denInput);
+                
+                // Check conversion resulted in valid numbers
+                if (isNaN(num) || isNaN(den)) {
+                    throw "Both inputs must be valid numbers.";
+                }
+                
+                // Check division by zero
+                if (den === 0) {
+                    throw "Division by zero is not allowed.";
+                }
+                
+                //division
+                const quotient = num / den;
+                resultElement.innerHTML = `Result: <strong>${quotient.toFixed(4)}</strong>`;
+                resultElement.style.color = "green";
+
+            } catch (error) {
+                resultElement.innerHTML = `<strong>Error:</strong> ${error}`;
+                resultElement.style.color = "red";
+
+            } finally {
+                console.log("Division operation completed.");
+            }
+        }
+    </script>
+</body>
+</html>

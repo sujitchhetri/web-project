@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AJAX Fetch JSON</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        #status {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .loading { background-color: #ffeb3b; }
+        .success { background-color: #4caf50; color: white; }
+        .error { background-color: #f44336; color: white; }
+    </style>
+</head>
+<body>
+    <h2>AJAX Fetch JSON Data</h2>
+    
+    <h3>Method 1: Fetch API (Modern)</h3>
+    <button onclick="fetchWithFetch()">Load with Fetch API</button>
+    
+    <h3>Method 2: XMLHttpRequest (Traditional)</h3>
+    <button onclick="fetchWithXHR()">Load with XMLHttpRequest</button>
+    
+    <div id="status"></div>
+    <div id="dataContainer"></div>
+
+    <script>
+        function showStatus(message, type = "") {
+            const statusDiv = document.getElementById("status");
+            statusDiv.className = type;
+            statusDiv.innerHTML = message;
+        }
+        
+        // Method 1: Fetch API
+        async function fetchWithFetch() {
+            showStatus("Loading data with Fetch API...", "loading");
+            
+            try {
+                const response = await fetch('students.json');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP Error: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                displayData(data, "Fetch API");
+                showStatus(`Successfully loaded ${data.length} records using Fetch API`, "success");
+                
+            } catch (error) {
+                showStatus(`Fetch API Error: ${error.message}`, "error");
+                document.getElementById("dataContainer").innerHTML = 
+                    `<p>Error: ${error.message}</p>`;
+            }
+        }
+        
+        // Method 2: XMLHttpRequest
+        function fetchWithXHR() {
+            showStatus("Loading data with XMLHttpRequest...", "loading");
+            
+            const xhr = new XMLHttpRequest();
+            
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        try {
+                            const data = JSON.parse(xhr.responseText);
+                            displayData(data, "XMLHttpRequest");
+                            showStatus(`Successfully loaded ${data.length} records using XMLHttpRequest`, "success");
+                        } catch (error) {
+                            showStatus(`JSON Parse Error: ${error.message}`, "error");
+                        }
+                    } else {
+                        showStatus(`HTTP Error ${xhr.status}`, "error");
+                    }
+                }
+            };
+            
+            xhr.open("GET", "students.json", true);
+            xhr.send();
+        }
+        
+        function displayData(data, method) {
+            let html = `<h3>Student Data (Loaded via ${method})</h3>`;
+            html += "<table>";
+            html += "<tr><th>ID</th><th>Name</th><th>Roll No</th><th>Program</th><th>Grade</th></tr>";
+            
+            data.forEach(student => {
+                html += `<tr>
+                    <td>${student.id}</td>
+                    <td>${student.name}</td>
+                    <td>${student.roll}</td>
+                    <td>${student.program}</td>
+                    <td>${student.grade}</td>
+                </tr>`;
+            });
+            
+            html += "</table>";
+            html += `<p>Total Records: ${data.length}</p>`;
+            
+            document.getElementById("dataContainer").innerHTML = html;
+        }
+    </script>
+</body>
+</html>

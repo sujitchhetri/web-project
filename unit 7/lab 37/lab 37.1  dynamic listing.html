@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Listing</title>
+    <style>
+        .list-container {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            background-color: #f8f9fa;
+        }
+        #itemList {
+            list-style-type: none;
+            padding: 0;
+        }
+        #itemList li {
+            padding: 10px;
+            margin: 5px 0;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .remove-btn {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .remove-btn:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <div class="list-container">
+        <h2>Dynamic Shopping List</h2>
+        <input type="text" id="newItem" placeholder="Enter item name">
+        <button onclick="addItem()">Add Item</button>
+        <button onclick="clearList()">Clear All</button>
+        
+        <ul id="itemList"></ul>
+        <p>Items: <span id="itemCount">0</span></p>
+    </div>
+
+    <script>
+        function addItem() {
+            const input = document.getElementById("newItem");
+            const itemText = input.value.trim();
+            
+            if (itemText === "") {
+                alert("Please enter an item!");
+                return;
+            }
+            
+            const list = document.getElementById("itemList");
+            const li = document.createElement("li");
+            
+            li.innerHTML = `
+                <span>${itemText}</span>
+                <button class="remove-btn" onclick="removeItem(this)">Remove</button>
+            `;
+            
+            list.appendChild(li);
+            input.value = "";
+            updateItemCount();
+        }
+        
+        function removeItem(button) {
+            const li = button.parentElement;
+            li.remove();
+            updateItemCount();
+        }
+        
+        function clearList() {
+            const list = document.getElementById("itemList");
+            list.innerHTML = "";
+            updateItemCount();
+        }
+        
+        function updateItemCount() {
+            const count = document.getElementById("itemList").children.length;
+            document.getElementById("itemCount").textContent = count;
+        }
+        
+        // Allow adding items with Enter key
+        document.getElementById("newItem").addEventListener("keypress", function(e) {
+            if (e.key === "Enter") {
+                addItem();
+            }
+        });
+    </script>
+</body>
+</html>

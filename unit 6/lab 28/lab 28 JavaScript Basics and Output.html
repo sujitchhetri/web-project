@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript Basics & Output</title>
+  </head>
+  <body>
+    <h1>JavaScript Basics & Output</h1>
+
+    <h2>1. Display Welcome Message</h2>
+    <button onclick="showAlert()">Show Alert</button>
+    <button onclick="showConsole()">Show in Console</button>
+    <button onclick="showHTML()">Show in Page</button>
+
+    <div id="output"></div>
+
+    <h2>2. Current Date and Time</h2>
+    <p id="datetime">Updating...</p>
+    <button onclick="updateDateTime()">Refresh Time</button>
+
+    <script>
+      function showAlert() {
+        alert("Welcome to JavaScript Lab 28!");
+      }
+
+      function showConsole() {
+        console.log("Welcome message logged to console.");
+      }
+
+      function showHTML() {
+        document.getElementById("output").innerHTML =
+          "<h3>Welcome to JavaScript Lab 28!</h3>" +
+          "<p>This message is displayed using innerHTML.</p>";
+      }
+
+      function updateDateTime() {
+        const now = new Date();
+        const dateTimeString = now.toLocaleString();
+        document.getElementById("datetime").innerHTML = dateTimeString;
+      }
+
+      window.onload = updateDateTime;
+      setInterval(updateDateTime, 1000);
+    </script>
+  </body>
+</html>

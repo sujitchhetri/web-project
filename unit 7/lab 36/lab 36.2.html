@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debugging Example</title>
+</head>
+<body>
+    <h2>Debugging with Console.log</h2>
+    <button onclick="debugExample()">Run Debug Example</button>
+    <button onclick="debugExampleFixed()">Run Fixed Version</button>
+    <p id="debugOutput"></p>
+
+    <script>
+        // Debug version with error
+        function debugExample() {
+            console.log("=== DEBUG VERSION (with error) ===");
+            let x = 10;
+            let y = 5;
+
+            console.log("Step 1: x =", x, "y =", y);
+
+            try {
+                // Intentional error: trying to use an undeclared variable
+                let sum = x + z; // z is not defined
+                console.log("Step 2: sum =", sum); // This won't run due to error
+            } catch (error) {
+                console.error("Error caught:", error.message);
+                console.log("Tip: Variable 'z' is not declared!");
+            }
+
+            document.getElementById("debugOutput").innerHTML = 
+                "Check the console for debugging logs and errors.";
+        }
+
+        // Fixed version without error
+        function debugExampleFixed() {
+            console.log("=== FIXED VERSION (working correctly) ===");
+            let x = 10;
+            let y = 5;
+
+            console.log("Step 1: x =", x, "y =", y);
+
+            // Declared z before using it
+            let z = 2;
+            let sum = x + y + z;
+            console.log("Step 2: x + y + z =", sum);
+
+            console.log("Step 3: All variables declared properly:");
+            console.log("- x:", x);
+            console.log("- y:", y);
+            console.log("- z:", z);
+            console.log("- sum:", sum);
+
+            document.getElementById("debugOutput").innerHTML = 
+                `Correct sum: ${sum}<br>Check the console for debugging logs.`;
+        }
+    </script>
+</body>
+</html>

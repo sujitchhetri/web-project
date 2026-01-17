@@ -1,0 +1,6 @@
+[
+    {"id": 1, "name": "Sujit Chhetri", "roll": 33, "program": "BCSIT", "grade": "A"},
+    {"id": 2, "name": "Arjan Magar", "roll": 1, "program": "BCSIT", "grade": "A+"},
+    {"id": 3, "name": "Suaan Shrestha", "roll": 31, "program": "BCSIT", "grade": "A"},
+    {"id": 4, "name": "Amit Kunwar", "roll": 5, "program": "BCSIT", "grade": "B+"}
+]

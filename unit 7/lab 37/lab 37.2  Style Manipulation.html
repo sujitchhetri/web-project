@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Style Manipulation</title>
+    <style>
+        #demoBox {
+            width: 300px;
+            height: 200px;
+            margin: 20px;
+            padding: 20px;
+            border: 3px solid #2c3e50;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            transition: all 0.3s ease;
+        }
+        .controls {
+            margin: 20px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        input {
+            padding: 8px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h2>DOM Style Manipulation Demo</h2>
+    
+    <div id="demoBox">
+        <h3>Change My Style!</h3>
+        <p>Use the buttons below to manipulate my appearance.</p>
+    </div>
+    
+    <div class="controls">
+        <button onclick="changeColor()">Change Background Color</button>
+        <button onclick="changeText()">Change Text</button>
+        <button onclick="toggleBorder()">Toggle Border</button>
+        <button onclick="increaseSize()">Increase Size</button>
+        <button onclick="resetAll()">Reset All</button>
+        
+        <br>
+        <label>Font Size: <input type="number" id="fontSize" value="16" min="8" max="50"></label>
+        <button onclick="applyFontSize()">Apply Font Size</button>
+        
+        <label>Text Color: <input type="color" id="textColor" value="#000000"></label>
+        <button onclick="applyTextColor()">Apply Text Color</button>
+    </div>
+
+    <script>
+        const demoBox = document.getElementById("demoBox");
+        const colors = ['#f1c40f', '#1abc9c', '#9b59b6', '#e67e22', '#3498db'];
+        let colorIndex = 0;
+        let textIndex = 0;
+        let sizeMultiplier = 1;
+        
+        function changeColor() {
+            demoBox.style.backgroundColor = colors[colorIndex];
+            colorIndex = (colorIndex + 1) % colors.length;
+        }
+        
+        function changeText() {
+            const texts = [
+                "Hello World!",
+                "Welcome to DOM Manipulation",
+                "JavaScript is awesome!",
+                "Style changed successfully!",
+                "Try other buttons too!"
+            ];
+            demoBox.querySelector('h3').textContent = texts[textIndex];
+            textIndex = (textIndex + 1) % texts.length;
+        }
+        
+        function toggleBorder() {
+            if (demoBox.style.borderStyle === 'none') {
+                demoBox.style.borderStyle = 'solid';
+                demoBox.style.borderColor = '#2c3e50';
+                demoBox.style.borderWidth = '3px';
+            } else {
+                demoBox.style.borderStyle = 'none';
+            }
+        }
+        
+        function increaseSize() {
+            sizeMultiplier += 0.1;
+            demoBox.style.transform = `scale(${sizeMultiplier})`;
+        }
+        
+        function applyFontSize() {
+            const fontSize = document.getElementById("fontSize").value;
+            demoBox.style.fontSize = fontSize + 'px';
+        }
+        
+        function applyTextColor() {
+            const textColor = document.getElementById("textColor").value;
+            demoBox.style.color = textColor;
+        }
+        
+        function resetAll() {
+            demoBox.style = "";
+            document.getElementById("fontSize").value = "16";
+            document.getElementById("textColor").value = "#000000";
+            sizeMultiplier = 1;
+            demoBox.querySelector('h3').textContent = "Change My Style!";
+            demoBox.querySelector('p').textContent = "Use the buttons below to manipulate my appearance.";
+        }
+    </script>
+</body>
+</html>

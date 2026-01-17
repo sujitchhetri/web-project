@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Callback Example</title>
+    </head>
+  <body>
+    <h2>Callback Example</h2>
+    <button onclick="startCallbackDemo()">Start</button>
+    <div id="output"></div>
+
+    <script>
+      function showMessage(message, delay, callback) {
+        setTimeout(() => {
+          document.getElementById("output").innerHTML +=
+            `<div>${message}</div>`;
+          if (callback) callback();
+        }, delay);
+      }
+
+      function startCallbackDemo() {
+        document.getElementById("output").innerHTML = "";
+        showMessage("Message 1 (0.5s)", 500, function () {
+          showMessage("Message 2 (1s)", 1000, function () {
+            showMessage("Message 3 (1.5s)", 1500, function () {
+              document.getElementById("output").innerHTML +=
+                "<div>All messages displayed</div>";
+            });
+          });
+        });
+      }
+    </script>
+  </body>
+</html>

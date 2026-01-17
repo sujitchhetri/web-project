@@ -1,0 +1,292 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Management System - ES6</title>
+    <style>
+      body {
+        font-family: Arial;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .container {
+        padding: 20px;
+        border: 2px solid #3498db;
+        border-radius: 10px;
+        margin: 20px 0;
+      }
+      button {
+        background: #3498db;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        margin: 5px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .output {
+        background: #f8f9fa;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 5px;
+        white-space: pre-wrap;
+        font-family: monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>ES6 & Modern JavaScript Lab</h2>
+      <h3>Student Management System</h3>
+
+      <div>
+        <h4>Task 13: ES6 Features</h4>
+        <button onclick="addStudent()">Add Student</button>
+        <button onclick="updateStudent()">Update Student</button>
+        <button onclick="displayStudents()">Display Students</button>
+        <button onclick="calculateStats()">Calculate Statistics</button>
+      </div>
+
+      <div>
+        <h4>Task 14: Spread/Rest Operators</h4>
+        <button onclick="mergeClasses()">Merge Classes</button>
+        <button onclick="copyStudent()">Copy Student</button>
+        <button onclick="filterTopStudents()">Top Students</button>
+        <button onclick="updateAllGrades()">Update All Grades</button>
+      </div>
+
+      <div id="output" class="output"></div>
+    </div>
+
+    <script>
+      const SCHOOL = "Pokhara College of Management";
+      let studentId = 100;
+
+      const SUBJECTS = [
+        "Math",
+        "Programming",
+        "English",
+        "Web Fundamentals",
+        "Database",
+      ];
+
+      // Grading system
+      const getGrade = (score) => {
+        if (score >= 90) return "A+";
+        if (score >= 80) return "A";
+        if (score >= 70) return "B+";
+        if (score >= 60) return "B";
+        if (score >= 50) return "C+";
+        if (score >= 40) return "C";
+        if (score >= 30) return "D";
+        return "F";
+      };
+
+      const createGrades = (math, programming, english, web, database) => {
+        return {
+          Math: getGrade(math),
+          Programming: getGrade(programming),
+          English: getGrade(english),
+          "Web Fundamentals": getGrade(web),
+          Database: getGrade(database),
+        };
+      };
+
+      let students = [
+        {
+          id: studentId++,
+          name: "Sujit Chhetri",
+          roll: 33,
+          program: "BCSIT",
+          grades: createGrades(85, 92, 78, 90, 88),
+        },
+        {
+          id: studentId++,
+          name: "Arjan Magar",
+          roll: 1,
+          program: "BCSIT",
+          grades: createGrades(92, 95, 85, 88, 91),
+        },
+      ];
+
+      // ES6 Features
+
+      const displayStudent = (student) => {
+        const { name, roll, program, grades } = student;
+
+        let output = `${name} (Roll: ${roll})\n`;
+        output += `Program: ${program}\n`;
+        output += `Grades:\n`;
+
+        // Display grades
+        SUBJECTS.forEach((subject) => {
+          output += `  ${subject}: ${grades[subject]}\n`;
+        });
+
+        return output;
+      };
+
+      const addStudent = () => {
+        let newId = studentId++;
+        const [name, roll, program] = ["Sahil Subedi", 21, "BCSIT"];
+
+        const newStudent = {
+          id: newId,
+          name,
+          roll,
+          program,
+          grades: createGrades(75, 82, 68, 79, 73),
+        };
+
+        students.push(newStudent);
+
+        const output = `Added Student:\n${displayStudent(newStudent)}`;
+        document.getElementById("output").textContent = output;
+      };
+
+      const updateStudent = () => {
+        if (students.length === 0) return;
+
+        let updatedStudent = { ...students[0] };
+        updatedStudent.grades = createGrades(88, 95, 82, 91, 89);
+        students[0] = updatedStudent;
+
+        const output = `Updated Student:\n${displayStudent(updatedStudent)}`;
+        document.getElementById("output").textContent = output;
+      };
+
+      const displayStudents = () => {
+        let output = `${SCHOOL}\n`;
+        output += "=".repeat(40) + "\n\n";
+
+        students.forEach((student, index) => {
+          output += `Student ${index + 1}:\n`;
+          output += displayStudent(student) + "\n";
+        });
+
+        output += `Total Students: ${students.length}`;
+        document.getElementById("output").textContent = output;
+      };
+
+      const calculateStats = () => {
+        const gradeValues = {
+          "A+": 95,
+          A: 85,
+          "B+": 75,
+          B: 65,
+          "C+": 55,
+          C: 45,
+          D: 35,
+          F: 20,
+        };
+
+        const allScores = students.flatMap((student) =>
+          Object.values(student.grades).map((grade) => gradeValues[grade])
+        );
+
+        const total = allScores.reduce((sum, score) => sum + score, 0);
+        const average =
+          allScores.length > 0 ? (total / allScores.length).toFixed(1) : 0;
+
+        const output = `Statistics:\nTotal Students: ${students.length}\nTotal Grades: ${allScores.length}\nAverage Score: ${average}`;
+        document.getElementById("output").textContent = output;
+      };
+
+      // Spread/Rest Operators
+
+      const mergeClasses = () => {
+        const newClass = [
+          {
+            id: studentId++,
+            name: "Amit Kunwar",
+            roll: 5,
+            program: "BCSIT",
+            grades: createGrades(65, 78, 72, 80, 68),
+          },
+          {
+            id: studentId++,
+            name: "Gehendra Bastola",
+            roll: 18,
+            program: "BCSIT",
+            grades: createGrades(88, 91, 85, 89, 87),
+          },
+        ];
+
+        students = [...students, ...newClass];
+
+        const output = `Merged Classes:\nNew total: ${students.length} students`;
+        document.getElementById("output").textContent = output;
+      };
+
+      const copyStudent = () => {
+        if (students.length === 0) return;
+
+        const original = students[0];
+        const copiedStudent = {
+          ...original,
+          id: studentId++,
+          name: `Copy of ${original.name}`,
+          roll: original.roll + 100,
+        };
+
+        students = [...students, copiedStudent];
+
+        const output = `Copied Student:\nOriginal: ${original.name}\nCopy: ${copiedStudent.name}`;
+        document.getElementById("output").textContent = output;
+      };
+
+      const filterTopStudents = () => {
+        const gradeRank = {
+          "A+": 8,
+          A: 7,
+          "B+": 6,
+          B: 5,
+          "C+": 4,
+          C: 3,
+          D: 2,
+          F: 1,
+        };
+
+        const getAverageGrade = (grades) => {
+          const ranks = SUBJECTS.map(
+            (subject) => gradeRank[grades[subject]] || 0
+          );
+          return ranks.reduce((a, b) => a + b) / ranks.length;
+        };
+
+        const topStudents = students
+          .filter((student) => getAverageGrade(student.grades) >= 6)
+          .sort(
+            (a, b) => getAverageGrade(b.grades) - getAverageGrade(a.grades)
+          );
+
+        let output = `Top Students (Average Grade A or A+):\n`;
+        topStudents.forEach((student, i) => {
+          const avg = getAverageGrade(student.grades);
+          const gradeLevel = avg >= 7.5 ? "A+" : "A";
+          output += `${i + 1}. ${student.name} - ${gradeLevel}\n`;
+        });
+
+        document.getElementById("output").textContent = output;
+      };
+
+      const updateAllGrades = () => {
+        students = students.map((student) => {
+          const newGrades = { ...student.grades };
+
+          if (!newGrades["Database"]) {
+            newGrades["Database"] = getGrade(85);
+          }
+          return { ...student, grades: newGrades };
+        });
+
+        const output = `Updated All Students:\nAdded/Updated grades for ${students.length} students`;
+        document.getElementById("output").textContent = output;
+      };
+
+      displayStudents();
+    </script>
+  </body>
+</html>
