@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Question 3</title>
+  <style>
+    body {
+      font-family: Arial;
+      display: flex;
+      justify-content: center;
+      margin-top: 40px;
+    }
+
+    .main {
+      width: 300px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .task {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px;
+      background: #eee;
+      border-radius: 5px;
+      transition: 0.2s;
+    }
+
+    .task:hover {
+      background: #ddd;
+    }
+
+    button {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="main">
+  <input id="taskInput" placeholder="Enter task">
+  <button onclick="addTask()">Add Task</button>
+  <div id="taskList"></div>
+</div>
+
+<script>
+  let tasks = [];
+
+  function render() {
+    const list = document.getElementById("taskList");
+    list.innerHTML = "";
+    tasks.forEach((t, i) => {
+      const div = document.createElement("div");
+      div.className = "task";
+      div.innerHTML = `${t} <button onclick="deleteTask(${i})">X</button>`;
+      list.appendChild(div);
+    });
+  }
+
+  function addTask() {
+    const input = document.getElementById("taskInput");
+    if (input.value) {
+      tasks.push(input.value);
+      input.value = "";
+      render();
+    }
+  }
+
+  function deleteTask(i) {
+    tasks.splice(i, 1);
+    render();
+  }
+</script>
+
+</body>
+</html>
